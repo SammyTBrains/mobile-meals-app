@@ -1,11 +1,11 @@
+import { useLayoutEffect } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/native";
-import { RootStackParamList } from "../type_utilities/types"; // Import the RootStackParamList type
 
+import { RootStackParamList } from "../type_utilities/types"; // Import the RootStackParamList type
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
-import { useLayoutEffect } from "react";
 
 type MealsOverviewScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -47,6 +47,7 @@ const MealsOverviewScreen = (props: Props) => {
         renderItem={(itemData) => {
           const item = itemData.item;
           const mealItemProps = {
+            mealId: item.id,
             title: item.title,
             imageUrl: item.imageUrl,
             duration: item.duration,

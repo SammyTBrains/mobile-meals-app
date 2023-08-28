@@ -6,8 +6,18 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { RootStackParamList } from "../type_utilities/types";
+
+type MealDetailsScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "MealDetails"
+>;
 
 type Props = {
+  mealId: string;
   title: string;
   imageUrl: string;
   duration: number;
@@ -16,6 +26,8 @@ type Props = {
 };
 
 const MealItem = (props: Props) => {
+  const navigation = useNavigation<MealDetailsScreenNavigationProp>();
+
   return (
     <View style={styles.mealItem}>
       <Pressable
@@ -23,6 +35,9 @@ const MealItem = (props: Props) => {
         style={
           ({ pressed }) => (pressed ? styles.buttonPressed : null) //IOS
         }
+        onPress={() => {
+          navigation.navigate("MealDetails", { mealId: props.mealId });
+        }}
       >
         <View style={styles.innerContainer}>
           <View>
