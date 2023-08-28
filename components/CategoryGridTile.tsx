@@ -1,13 +1,19 @@
-import { Pressable, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = { title: string; color: string };
 
 const CategoryGridTile = (props: Props) => {
   return (
-    <View>
-      <Pressable>
-        <View>
-          <Text>{props.title}</Text>
+    <View style={styles.gridItem}>
+      <Pressable
+        android_ripple={{ color: "#ccc" }}
+        style={({ pressed }) => [
+          styles.button,
+          pressed ? styles.buttonPressed : null, //IOS
+        ]}
+      >
+        <View style={[styles.innerContainer, { backgroundColor: props.color }]}>
+          <Text style={styles.title}>{props.title}</Text>
         </View>
       </Pressable>
     </View>
@@ -15,3 +21,40 @@ const CategoryGridTile = (props: Props) => {
 };
 
 export default CategoryGridTile;
+
+const styles = StyleSheet.create({
+  gridItem: {
+    flex: 1,
+    margin: 16,
+    height: 150,
+    borderRadius: 8,
+
+    //android
+    elevation: 4,
+    overflow: Platform.OS === "android" ? "hidden" : "visible", //To show shadow on IOS
+
+    //IOS
+    backgroundColor: "white", //but made it look better on android tho
+    shadowColor: "black",
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+  },
+  button: {
+    flex: 1,
+  },
+  buttonPressed: {
+    opacity: 0.5,
+  },
+  innerContainer: {
+    flex: 1,
+    padding: 16,
+    borderRadius: 8, //IOS needs?
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+});
