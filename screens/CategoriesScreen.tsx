@@ -15,10 +15,6 @@ type Props = {
 };
 
 const CategoriesScreen = (props: Props) => {
-  const pressHandler = () => {
-    props.navigation.navigate("MealsOverview");
-  };
-
   return (
     <FlatList
       data={CATEGORIES}
@@ -27,7 +23,11 @@ const CategoriesScreen = (props: Props) => {
         <CategoryGridTile
           title={itemData.item.title}
           color={itemData.item.color}
-          onPress={pressHandler}
+          onPress={() => {
+            props.navigation.navigate("MealsOverview", {
+              categoryId: itemData.item.id,
+            });
+          }}
         />
       )}
       numColumns={2}
