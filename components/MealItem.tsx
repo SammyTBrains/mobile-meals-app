@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { RootStackParamList } from "../type_utilities/types";
+import MealDetails from "./MealDetails";
 
 type MealDetailsScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -44,15 +45,11 @@ const MealItem = (props: Props) => {
             <Image source={{ uri: props.imageUrl }} style={styles.image} />
             <Text style={styles.title}>{props.title}</Text>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.detailItem}>{props.duration}m</Text>
-            <Text style={styles.detailItem}>
-              {props.complexity.toUpperCase()}
-            </Text>
-            <Text style={styles.detailItem}>
-              {props.affordability.toLocaleUpperCase()}
-            </Text>
-          </View>
+          <MealDetails
+            duration={props.duration}
+            complexity={props.complexity}
+            affordability={props.affordability}
+          />
         </View>
       </Pressable>
     </View>
@@ -93,15 +90,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     padding: 8,
-  },
-  details: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 8,
-  },
-  detailItem: {
-    marginHorizontal: 4,
-    fontSize: 12,
   },
 });
