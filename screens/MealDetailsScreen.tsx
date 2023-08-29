@@ -1,5 +1,12 @@
 import { useLayoutEffect } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Button,
+} from "react-native";
 import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -8,6 +15,7 @@ import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealList from "../components/MealDetail/MealList";
+import IconButton from "../components/IconButton";
 
 type MealDetailsScreenRouteProp = RouteProp<RootStackParamList, "MealDetails">;
 
@@ -26,9 +34,20 @@ const MealDetailsScreen = (props: Props) => {
 
   const selectedMeal = MEALS.find((item) => item.id === mealId);
 
+  const headerButtonPressHandler = () => {
+    console.log("Pressed!");
+  };
+
   useLayoutEffect(() => {
     props.navigation.setOptions({
       title: selectedMeal?.title,
+      headerRight: () => (
+        <IconButton
+          icon="star"
+          color="white"
+          onPress={headerButtonPressHandler}
+        />
+      ),
     });
   }, [selectedMeal, props.navigation]);
 
