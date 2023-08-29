@@ -9,8 +9,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { RootStackParamList } from "../type_utilities/types";
-import MealDetails from "./MealDetails";
+import { RootStackParamList } from "../../type_utilities/types";
+import MealDetails from "../MealDetails";
 
 type MealDetailsScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
